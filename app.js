@@ -34,7 +34,6 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
   diceDOM.style.display = 'block';
   diceDOM.src = 'Images/dice-' + dice + '.png';
 
-
   //3. Updated the rounded Score if it's not a 1
   if (dice !== 1) {
     //Add Score
@@ -42,21 +41,46 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     document.querySelector('#current-' + activePlayer).textContent = roundScore;
   } else {
     //Next Player
-    activePlayer === 0 ? activePlayer = 1 : activePlayer === 0; //Ternary operator
-    roundScore = 0;
-
-    document.getElementById('current-0').textContent = '0';
-    document.getElementById('current-1').textContent = '0';
-
-
-    document.querySelector('.player-0-panel').classList.toggle('active');
-    document.querySelector('.player-1-panel').classList.toggle('active');
-
-    document.querySelector('.dice').style.display = 'none';
+    nextPlayer();
 
   }
 
 });
+
+
+document.querySelector('.btn-hold').addEventListener('click', function() {
+  //add current score to global score
+  scores[activePlayer] += roundScore; //shorthand for: scores[activePlayer] = scores[activePlayer] + roundScore;
+
+  //Update UI
+  document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+  //Check if player won the game
+    if (scores[activePlayer] >= 100) {
+      document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+    } else {
+      //Next player
+      nextPlayer();
+    }
+});
+
+
+function nextPlayer() {
+  //Next Player
+  activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; //Ternary operator
+  roundScore = 0;
+  console.log(activePlayer);
+
+  document.getElementById('current-0').textContent = '0';
+  document.getElementById('current-1').textContent = '0';
+
+
+  document.querySelector('.player-0-panel').classList.toggle('active');
+  document.querySelector('.player-1-panel').classList.toggle('active');
+
+  document.querySelector('.dice').style.display = 'none';
+
+};
 
 
 //document.querySelector('#current-' + activePlayer).textContent = dice;
