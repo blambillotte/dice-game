@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, winningScore;
 
 init();
 
@@ -45,7 +45,9 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
     //Check if player won the game
-      if (scores[activePlayer] >= 100) {
+    winningScore = document.querySelector('#winning-score').value;
+    //console.log(winningScore);
+      if (scores[activePlayer] >= winningScore) {
         document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
         document.querySelector('.dice').style.display = 'none';
         document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
@@ -64,7 +66,7 @@ function nextPlayer() {
   //Next Player
   activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; //Ternary operator
   roundScore = 0;
-  console.log(activePlayer);
+  //console.log(activePlayer);
 
   document.getElementById('current-0').textContent = '0';
   document.getElementById('current-1').textContent = '0';
@@ -99,6 +101,7 @@ function init() {
   document.querySelector('.player-0-panel').classList.remove('active');
   document.querySelector('.player-1-panel').classList.remove('active');
   document.querySelector('.player-0-panel').classList.add('active');
+  document.querySelector('#winning-score').value = 20;
 }
 
 //document.querySelector('#current-' + activePlayer).textContent = dice;
