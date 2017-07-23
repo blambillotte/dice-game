@@ -30,7 +30,8 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
       document.querySelector('#current-' + activePlayer).textContent = roundScore;
     } else {
       //Next Player
-      nextPlayer();
+      setTimeout(nextPlayer, 2500);
+      // TODO: Add visible indicator of rolling a 1 being bad and disallow roll button.
     }
   }
 });
