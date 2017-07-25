@@ -165,5 +165,19 @@ i {
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 }
 
+.losing-roll {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 153px;
+  transform: translateX(-50%);
+  height: 150px;
+  width: 150px;
+  background-color: rgba(235, 77, 77, 0.5);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
 .winner { background-color: #f7f7f7; }
 .winner .player-name { font-weight: 300; color: #EB4D4D; }

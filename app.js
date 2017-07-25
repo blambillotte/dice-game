@@ -10,6 +10,7 @@ GAME RULES:
 */
 
 var scores, roundScore, activePlayer, gamePlaying, winningScore;
+var roundLost = document.querySelector('.losing-roll');
 
 init();
 
@@ -23,15 +24,17 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     diceDOM.style.display = 'block';
     diceDOM.src = 'Images/dice-' + dice + '.png';
 
-    //3. Updated the rounded Score if it's not a 1
+    //3. Updated the round Score if it's not a 1
     if (dice !== 1) {
       //Add Score
-      roundScore += dice; //(roundScore = roundScore + dice;)
+      roundScore += dice;
       document.querySelector('#current-' + activePlayer).textContent = roundScore;
     } else {
+      roundLost.style.display = 'block';
+      document.querySelector('#current-' + activePlayer).textContent = 'X';
       //Next Player
       setTimeout(nextPlayer, 2500);
-      // TODO: Add visible indicator of rolling a 1 being bad and disallow roll button.
+
     }
   }
 });
@@ -68,7 +71,10 @@ function nextPlayer() {
   activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; //Ternary operator
   roundScore = 0;
   //console.log(activePlayer);
+  //Remove roundLost div
+  roundLost.style.display = 'none';
 
+  //reset roundScores
   document.getElementById('current-0').textContent = '0';
   document.getElementById('current-1').textContent = '0';
 
